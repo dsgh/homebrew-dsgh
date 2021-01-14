@@ -32,7 +32,7 @@ class PostgisDsgh < Formula
   depends_on "geos"
   depends_on "json-c" # for GeoJSON and raster handling
   depends_on "pcre"
-  depends_on "postgresql" => "12.5"
+  depends_on "postgresql@12"
   depends_on "proj"
   depends_on "protobuf-c" # for MVT (map vector tiles) support
   depends_on "sfcgal" # for advanced 2D/3D functions
@@ -43,7 +43,7 @@ class PostgisDsgh < Formula
     args = [
       "--with-projdir=#{Formula["proj"].opt_prefix}",
       "--with-jsondir=#{Formula["json-c"].opt_prefix}",
-      "--with-pgconfig=#{Formula["postgresql"].opt_bin}/pg_config",
+      "--with-pgconfig=#{Formula["postgresql@12"].opt_bin}/pg_config",
       "--with-protobufdir=#{Formula["protobuf-c"].opt_bin}",
       # Unfortunately, NLS support causes all kinds of headaches because
       # PostGIS gets all of its compiler flags from the PGXS makefiles. This
@@ -62,8 +62,8 @@ class PostgisDsgh < Formula
     bin.install Dir["stage/**/bin/*"]
     lib.install Dir["stage/**/lib/*"]
     include.install Dir["stage/**/include/*"]
-    (doc/"postgresql/extension").install Dir["stage/**/share/doc/postgresql/extension/*"]
-    (share/"postgresql/extension").install Dir["stage/**/share/postgresql/extension/*"]
+    (doc/"postgresql/extension").install Dir["stage/**/share/doc/postgresql@12/extension/*"]
+    (share/"postgresql/extension").install Dir["stage/**/share/postgresql@12/extension/*"]
     pkgshare.install Dir["stage/**/contrib/postgis-*/*"]
     (share/"postgis_topology").install Dir["stage/**/contrib/postgis_topology-*/*"]
 
